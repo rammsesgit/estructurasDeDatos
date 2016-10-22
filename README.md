@@ -1,2 +1,2 @@
 # estructurasDeDatos
-Clases para estructuras de datos.
+Clases para _estructuras de datos._
