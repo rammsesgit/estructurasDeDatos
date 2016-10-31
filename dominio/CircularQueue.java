@@ -51,11 +51,13 @@ public class CircularQueue implements Queue {
 	 * @param element
 	 * @return Sin valores de retorno.
 	 */
-	public void insert(Object element) {
-		queue[rear] = element;
-		rear++;
-		if (rear == queue.length)
-			rear = 0;
+	public void insert(Object element) throws Exception {
+		if (!isFull()) {
+			queue[rear] = element;
+			rear = ++rear % queue.length;
+		} else {
+			throw new Exception("La cola ya está llena");
+		}
 	}
 
 	/**
@@ -64,11 +66,27 @@ public class CircularQueue implements Queue {
 	 * @param SinParametros.
 	 * @return auxiliar, que es el elemento que se extrajo.
 	 */
-	public Object extract() {
+	public Object extract() throws Exception {
 		Object auxiliar = queue[front];
-		front++;
-		if (front == queue.length)
-			front = 0;
-		return auxiliar;
+		if (!isEmpty()) {
+			front = ++front % queue.length;
+			return auxiliar;
+		} else {
+			throw new Exception("La cola está vacia.");
+		}
+	}
+
+	/**
+	 * Regresa el elemento del frente (front) sin eliminarlo.
+	 * 
+	 * @param sinParametros
+	 * @return el primer elemento de la cola
+	 */
+	public Object front() throws Exception {
+		if (!isEmpty()) {
+			return queue[front];
+		} else {
+			throw new Exception("La cola está vacia");
+		}
 	}
 }// Class

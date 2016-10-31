@@ -4,26 +4,25 @@ import estructuras.Queue;
 
 /**
  * @author Isar Ramses Cadena Gaona
- * @version v1.0_28/10/2016
+ * @version v1.0_20/10/2016 v1.1_24/10/2016
  * 
  *          Clase que implementa la interface Queue, además, proporciona
- *          funciones basicas de una cola ilimitada como lo son; insert,
- *          extract, isEmpty e isFull.
+ *          funciones basicas de una cola como lo son; insert, extract, isEmpty
+ *          e isFull.
  */
-public class QueueUnlimited implements Queue {
+public class QueueLimited extends Object implements Queue {
 	// Declaración de las variables que seran usadas por la clase.
 	private Object[] queue;
-	private Object[] temporal;
 	private int rear;
 
 	/**
-	 * Constructor de la clase que crea objetos QueueUnlimited por defecto.
+	 * Constructor de la clase que crea objetos QueueLimited por defecto.
 	 * 
 	 * @param SinParametros
 	 * @return Sin valores de retorno.
 	 */
-	public QueueUnlimited() {
-		queue = new Object[0];
+	public QueueLimited() {
+		queue = new Object[10];
 		rear = 0;
 	}
 
@@ -33,7 +32,16 @@ public class QueueUnlimited implements Queue {
 	 * @return true si la cola está vacia.
 	 */
 	public boolean isEmpty() {
-		return queue.length == 0;
+		return rear == 0;
+	}
+
+	/**
+	 * Método que indica si la cola está llena.
+	 * 
+	 * @return true si la cola está llena.
+	 */
+	public boolean isFull() {
+		return rear == queue.length - 1;
 	}
 
 	/**
@@ -42,13 +50,13 @@ public class QueueUnlimited implements Queue {
 	 * @param element
 	 * @return Sin valores de retorno.
 	 */
-	public void insert(Object element) {
-		temporal = new Object[queue.length + 1];
-		for (int i = 0; i < queue.length; i++)
-			temporal[i] = queue[i];
-		temporal[rear] = element;
-		queue = temporal;
-		rear++;
+	public void insert(Object element) throws Exception {
+		if (!isFull()) {
+			queue[rear] = element;
+			rear++;
+		} else {
+			throw new Exception("La cola está llena.");
+		}
 	}
 
 	/**
@@ -58,16 +66,14 @@ public class QueueUnlimited implements Queue {
 	 * @return auxiliar, que es el elemento que se extrajo.
 	 */
 	public Object extract() throws Exception {
+		Object auxiliar = queue[0];
 		if (!isEmpty()) {
-			Object auxiliar = queue[0];
-			temporal = new Object[queue.length - 1];
-			for (int i = 0; i < temporal.length; i++)
-				temporal[i] = queue[i + 1];
+			for (int i = 0; i < queue.length - 1; i++)
+				queue[i] = queue[i + 1];
 			rear--;
-			queue = temporal;
 			return auxiliar;
 		} else {
-			throw new Exception("La cola está vacía.");
+			throw new Exception("La cola está vacia.");
 		}
 	}
 

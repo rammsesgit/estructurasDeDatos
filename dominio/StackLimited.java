@@ -1,9 +1,5 @@
 package dominio;
 
-import java.util.Arrays;
-
-import javax.swing.JOptionPane;
-
 import estructuras.Stack;
 
 /**
@@ -19,7 +15,7 @@ import estructuras.Stack;
 
 public class StackLimited extends Object implements Stack {
 
-	private Object [] stack;
+	private Object[] stack;
 	private int top;
 	private boolean vacio, lleno;
 
@@ -31,13 +27,13 @@ public class StackLimited extends Object implements Stack {
 
 	public StackLimited(int tamaño) {
 		if (tamaño <= 0) {
-			stack = new Object [10];
+			stack = new Object[10];
 		} else {
-			stack = new Object [tamaño];
+			stack = new Object[tamaño];
 		}
 		top = 0;
 	}
-	
+
 	/**
 	 * metodo que ingresa un elemento a la pila
 	 * 
@@ -56,7 +52,7 @@ public class StackLimited extends Object implements Stack {
 	 * 
 	 * @return stack
 	 */
-	public Object  pop() {
+	public Object pop() {
 		if (top > 0) {
 			return stack[--top];
 		}
