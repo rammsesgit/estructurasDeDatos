@@ -1,29 +1,18 @@
 package estructuras;
 
 /**
- * 
  * @author Isar Ramses Cadena Gaona
- *
+ * @version 1.0_18/10/2016
  */
 public interface Queue {
 
 	/**
 	 * Indica si la pila está vacia.
 	 * 
-	 * @param Sin
-	 *            parametros.
+	 * @param SinParametros.
 	 * @return true si la pila está vacia, false en caso contrario.
 	 */
 	public abstract boolean isEmpty();
-
-	/**
-	 * Indica si la pila está llena.
-	 * 
-	 * @param Sin
-	 *            parametros.
-	 * @return true si la pila está llena, false en caso contrario.
-	 */
-	public abstract boolean isFull();
 
 	/**
 	 * Inserta un elemento en la pila.
@@ -41,5 +30,13 @@ public interface Queue {
 	 *            parametros.
 	 * @return Object, que es el elemento del fondo de la cola.
 	 */
-	public abstract Object extract();
-}//Interface
+	public abstract Object extract() throws Exception;
+
+	/**
+	 * Regresa el elemento del frente (front) sin eliminarlo
+	 * 
+	 * @param sinParametros
+	 * @return el primer elemento de la cola
+	 */
+	public abstract Object front() throws Exception;
+}// Interface
