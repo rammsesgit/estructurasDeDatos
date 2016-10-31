@@ -2,23 +2,23 @@ package aplicacion;
 
 import javax.swing.JOptionPane;
 import estructuras.Queue;
-import dominio.QueueUnlimited;
+import dominio.QueueLimited;
 
 /**
  * @author Isar Ramses Cadena Gaona
  * @version 2.0_30/10/2016
  *
  *          Clase aplicación que brinda una interfaz grafica para que el usuario
- *          pueda interactuar con Colas ilimitadas, haciendo uso de sus
- *          funciones básicas como lo son; insert, extract, isEmpty, front.
+ *          pueda interactuar con Colas limitadas, haciendo uso de sus funciones
+ *          básicas como lo son; insert, extract, isEmpty, isFull, front.
  */
-public class AplicacionQueueUnlimited {
+public class AplicacionQueueLimited {
 	public static void main(String[] args) {
 		// Declaración y creación de la cola.
-		Queue cola = new QueueUnlimited();
+		Queue cola = new QueueLimited();
 		// Arreglo de String que contiene las opciones del menú
-		String[] opcionesDelMenu = { "Insertar", "Extraer", "Conocer el elemento del frente", "Saber si está vacía",
-				"Terminar" };
+		String[] opcionesDelMenu = { "Insertar", "Extraer", "Conocer el elemento del frente", "Saber si está llena",
+				"Saber si está vacía", "Terminar" };
 		// Cadena donde se almacena la opcion elegida por el usuario.
 		String menu = "";
 
@@ -41,7 +41,14 @@ public class AplicacionQueueUnlimited {
 				case "Conocer el elemento del frente":
 					JOptionPane.showMessageDialog(null, cola.front());
 					break;
-				case "Saber si está vacía":
+				case "Saber si está llena":
+					if (((QueueLimited) cola).isFull()) {
+						JOptionPane.showMessageDialog(null, "La cola está llena.");
+					} else {
+						JOptionPane.showMessageDialog(null, "La cola no está llena.");
+					}
+					break;
+				case "Saber si está vacia":
 					if (cola.isEmpty()) {
 						JOptionPane.showMessageDialog(null, "La cola está vacía.");
 					} else {
@@ -52,10 +59,11 @@ public class AplicacionQueueUnlimited {
 			} catch (NullPointerException npe) {
 				// Termina la ejecución.
 				menu = "Terminar";
+
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e.getMessage());
 			}
-		} while (!menu.equals(opcionesDelMenu[4]));
+		} while (!menu.equals(opcionesDelMenu[5]));
 
 	}// main
 }// class

@@ -1,6 +1,7 @@
 package aplicacion;
 
 import javax.swing.JOptionPane;
+import estructuras.Stack;
 import dominio.StackLimited;
 
 public class AplicacionStackLimited {
@@ -15,7 +16,7 @@ public class AplicacionStackLimited {
 		} catch (NumberFormatException e) {
 			System.out.println("ingresó un String");
 		}
-		StackLimited nStack = new StackLimited(tamañoUsuario);
+		Stack nStack = new StackLimited(tamañoUsuario);
 		do {
 			String eleccion = (String) JOptionPane.showInputDialog(null, "¿Que desea hacer?",
 					"Opciones para el usuario", JOptionPane.DEFAULT_OPTION, null, menu, menu[0]);
@@ -42,10 +43,10 @@ public class AplicacionStackLimited {
 					JOptionPane.showMessageDialog(null, nStack.top());
 					break;
 				case "Saber si la pila esta llena":
-					JOptionPane.showMessageDialog(null, nStack.isFull());
+					JOptionPane.showMessageDialog(null, ((StackLimited) nStack).isFull());
 					break;
 				}
-			} catch (NullPointerException e) {
+			} catch (Exception e) {
 				// continuar
 			}
 			usuario = JOptionPane.showConfirmDialog(null, "¿Realizar otra acción?", " ", JOptionPane.YES_NO_OPTION);
